@@ -6,6 +6,7 @@ import { Button, Callout, Text, TextField } from "@radix-ui/themes";
 import { Controller, useForm } from "react-hook-form";
 
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import ErrorMessage from "@/app/components/ErrorMessage";
 import SimpleMDE from "react-simplemde-editor";
 import axios from "axios";
 import { createIssueSchema } from "@/app/validationSchemas";
@@ -57,11 +58,7 @@ const NewIssuePage = () => {
             {...register("title")}
           ></TextField.Input>
         </TextField.Root>
-        {errors.title && (
-          <Text color="red" as="p">
-            {errors.title.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
 
         <Controller
           name="description"
@@ -70,11 +67,7 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         ></Controller>
-        {errors.description && (
-          <Text color="red" as="p">
-            {errors.description.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
         <Button>Submit New Issue</Button>
       </form>
