@@ -1,5 +1,4 @@
 import {
-  Button,
   Table,
   TableBody,
   TableCell,
@@ -10,7 +9,7 @@ import {
 
 import IssueActions from "./IssueActions";
 import IssueStatusBadge from "../components/IssueStatusBadge";
-import Link from "next/link";
+import Link from "../components/Link";
 import React from "react";
 import delay from "delay";
 import prisma from "@/prisma/client";
