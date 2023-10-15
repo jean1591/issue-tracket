@@ -12,6 +12,7 @@ import {
 import { AiFillBug } from "react-icons/ai";
 import Link from "next/link";
 import React from "react";
+import { Skeleton } from "@/app/components";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -67,7 +68,7 @@ const AuthStatus = () => {
   const { status, data: session } = useSession();
 
   if (status === "loading") {
-    return null;
+    return <Skeleton width="3rem" />;
   }
 
   if (status === "unauthenticated") {
