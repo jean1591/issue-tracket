@@ -8,18 +8,14 @@ import { Controller, useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import { Issue } from "@prisma/client";
+import SimpleMDE from "react-simplemde-editor";
 import Spinner from "@/app/components/Spinner";
 import axios from "axios";
-import dynamic from "next/dynamic";
 import { issueSchema } from "@/app/validationSchemas";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-});
 
 type IssueFormData = z.infer<typeof issueSchema>;
 
