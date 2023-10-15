@@ -8,6 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import SimpleMDE from "react-simplemde-editor";
+import Spinner from "@/app/components/Spinner";
 import axios from "axios";
 import { createIssueSchema } from "@/app/validationSchemas";
 import { useRouter } from "next/navigation";
@@ -29,6 +30,7 @@ const NewIssuePage = () => {
   });
 
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <div className="max-w-xl ">
@@ -45,9 +47,11 @@ const NewIssuePage = () => {
         className="space-y-3"
         onSubmit={handleSubmit(async (data) => {
           try {
+            setIsSubmitting(true);
             await axios.post("/api/issues", data);
             router.push("/issues");
           } catch (error) {
+            setIsSubmitting(false);
             setError("An unexpected error occurred");
           }
         })}
@@ -69,7 +73,9 @@ const NewIssuePage = () => {
         ></Controller>
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button>Submit New Issue</Button>
+        <Button disabled={isSubmitting}>
+          Submit New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
