@@ -1,5 +1,3 @@
-import "react-loading-skeleton/dist/skeleton.css";
-
 import {
   Table,
   TableBody,
@@ -11,7 +9,7 @@ import {
 
 import IssueActions from "./IssueActions";
 import React from "react";
-import Skeleton from "react-loading-skeleton";
+import { Skeleton } from "@/app/components";
 
 const LoadingIssuesPage = () => {
   const issues = [1, 2, 3, 4, 5];
