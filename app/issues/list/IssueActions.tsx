@@ -6,7 +6,7 @@ import React from "react";
 
 const IssueActions = () => {
   return (
-    <Flex mb="5" justify="between">
+    <Flex justify="between">
       <IssueStatusFilter />
       <Button>
         <Link href="/issues/new">New Issue</Link>
