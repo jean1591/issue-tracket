@@ -21,6 +21,24 @@ model Issue {
   assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
 }
 
+model Project {
+  createdAt        DateTime      @default(now())
+  description      String        @db.Text
+  id               Int           @id @default(autoincrement())
+  status           ProjectStatus @default(CONCEPTION)
+  title            String        @db.VarChar(255)
+  updatedAt        DateTime      @updatedAt
+  assignedToUserId String?       @db.VarChar(255)
+  assignedToUser   User?         @relation(fields: [assignedToUserId], references: [id])
+}
+
+enum ProjectStatus {
+  CANCELLED
+  CONCEPTION
+  IN_PROGRESS
+  TERMINATED
+}
+
 enum Status {
   CLOSED
   IN_PROGRESS
@@ -55,14 +73,15 @@ model Session {
 }
 
 model User {
-  id             String    @id @default(cuid())
-  name           String?
-  email          String?   @unique
-  emailVerified  DateTime?
-  image          String?
-  accounts       Account[]
-  sessions       Session[]
-  assignedIssues Issue[]
+  id               String    @id @default(cuid())
+  name             String?
+  email            String?   @unique
+  emailVerified    DateTime?
+  image            String?
+  accounts         Account[]
+  sessions         Session[]
+  assignedIssues   Issue[]
+  assignedProjects Project[]
 }
 
 model VerificationToken {
