@@ -10,17 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Issue {
-  createdAt        DateTime @default(now())
-  description      String   @db.Text
-  id               Int      @id @default(autoincrement())
-  status           Status   @default(OPEN)
-  title            String   @db.VarChar(255)
-  updatedAt        DateTime @updatedAt
-  assignedToUserId String?  @db.VarChar(255)
-  assignedToUser   User?    @relation(fields: [assignedToUserId], references: [id])
-}
-
 model Project {
   createdAt        DateTime      @default(now())
   description      String        @db.Text
@@ -37,12 +26,6 @@ enum ProjectStatus {
   CONCEPTION
   IN_PROGRESS
   TERMINATED
-}
-
-enum Status {
-  CLOSED
-  IN_PROGRESS
-  OPEN
 }
 
 model Account {
@@ -80,7 +63,6 @@ model User {
   image            String?
   accounts         Account[]
   sessions         Session[]
-  assignedIssues   Issue[]
   assignedProjects Project[]
 }
 

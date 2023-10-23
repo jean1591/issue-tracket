@@ -6,16 +6,23 @@ import { Card } from "@radix-ui/themes";
 import React from "react";
 
 interface Props {
-  open: number;
+  cancelled: number;
+  conception: number;
   inProgress: number;
-  closed: number;
+  terminated: number;
 }
 
-const IssueChart = ({ closed, inProgress, open }: Props) => {
+const ProjectChart = ({
+  cancelled,
+  conception,
+  inProgress,
+  terminated,
+}: Props) => {
   const data = [
-    { label: "Open", value: open },
-    { label: "Closed", value: closed },
+    { label: "Cancelled", value: cancelled },
+    { label: "Conception", value: conception },
     { label: "In Progress", value: inProgress },
+    { label: "Terminated", value: terminated },
   ];
 
   return (
@@ -35,4 +42,4 @@ const IssueChart = ({ closed, inProgress, open }: Props) => {
   );
 };
 
-export default IssueChart;
+export default ProjectChart;

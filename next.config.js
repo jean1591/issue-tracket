@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {};
 
-module.exports = nextConfig
-
+module.exports = nextConfig;
 
 // Injected content via Sentry wizard below
 
@@ -17,7 +16,7 @@ module.exports = withSentryConfig(
     // Suppresses source map uploading logs during build
     silent: true,
     org: "no-corp-z9",
-    project: "issue-tracker",
+    project: "project-tracker",
   },
   {
     // For all available options, see:

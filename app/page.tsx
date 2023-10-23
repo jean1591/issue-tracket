@@ -1,25 +1,42 @@
 import { Flex, Grid } from "@radix-ui/themes";
 
-import IssueChart from "./IssueChart";
-import IssueSummary from "./IssueSummary";
-import LastestIssues from "./LastestIssues";
+import LastestProjects from "./LastestProjects";
 import { Metadata } from "next";
+import ProjectChart from "./ProjectChart";
+import ProjectSummary from "./ProjectSummary";
 import prisma from "@/prisma/client";
 
 export default async function Home() {
-  const open = await prisma.issue.count({ where: { status: "OPEN" } });
-  const closed = await prisma.issue.count({ where: { status: "CLOSED" } });
-  const inProgress = await prisma.issue.count({
+  const cancelled = await prisma.project.count({
+    where: { status: "CANCELLED" },
+  });
+  const conception = await prisma.project.count({
+    where: { status: "CONCEPTION" },
+  });
+  const inProgress = await prisma.project.count({
     where: { status: "IN_PROGRESS" },
+  });
+  const terminated = await prisma.project.count({
+    where: { status: "TERMINATED" },
   });
 
   return (
     <Grid columns={{ initial: "1", md: "2" }} gap="5">
       <Flex direction="column" gap="5">
-        <IssueSummary open={open} closed={closed} inProgress={inProgress} />
-        <IssueChart open={open} closed={closed} inProgress={inProgress} />{" "}
+        <ProjectSummary
+          cancelled={cancelled}
+          conception={conception}
+          inProgress={inProgress}
+          terminated={terminated}
+        />
+        <ProjectChart
+          cancelled={cancelled}
+          conception={conception}
+          inProgress={inProgress}
+          terminated={terminated}
+        />
       </Flex>
-      <LastestIssues />
+      <LastestProjects />
     </Grid>
   );
 }
